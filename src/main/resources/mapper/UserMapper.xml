@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yyn.yiju.dao.UserDao">
+
+    <!-- 登录 -->
+    <select id="findUserByPhone" parameterType="java.lang.String" resultType="cn.yyn.yiju.bean.UserInfo">
+        select * from tb_user where phone=#{phone}
+    </select>
+
+    <!-- 注册 -->
+    <insert id="register" parameterType="String">
+        insert into tb_user(phone,password) value(#{phone},#{password})
+    </insert>
+
+    <!-- 修改个人信息 -->
+    <update id="saveEdit" parameterType="cn.yyn.yiju.bean.UserInfo">
+        update tb_user
+        set truename=#{truename},nickname=#{nickname},gender=#{gender},city=#{city}
+        where phone=#{phone}
+    </update>
+
+    <!-- 根据user_id去查询user_auth -->
+    <select id="findUserAuthById" parameterType="Integer" resultType="cn.yyn.yiju.bean.UserAuth">
+        select * from tb_user_auth where user_id=#{userId}
+    </select>
+
+    <!-- 实名认证 -->
+    <insert id="saveAuth" parameterType="cn.yyn.yiju.bean.UserAuth">
+        insert into
+        tb_user_auth(user_id,user_name,user_gender,user_card,user_card_address,user_live_address,create_time,update_time)
+        values(#{userId},#{userName},#{userGender},#{userCard},#{userCardAddress},#{userLiveAddress},#{createTime},#{updateTime})
+    </insert>
+
+    <!--   删除认证  -->
+    <delete id="deleteAuthById" parameterType="Integer">
+        delete from tb_user_auth where user_id=#{userId}
+    </delete>
+
+    <!--  修改密码
+        Integer String
+    -->
+    <update id="updPassword" parameterType="cn.yyn.yiju.bean.UserInfo">
+        update tb_user set password=#{password} where user_id=#{userId}
+    </update>
+
+</mapper>
