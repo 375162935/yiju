@@ -1,5 +1,7 @@
 package cn.yyn.yiju.dao;
 
+import cn.yyn.yiju.bean.House;
+import cn.yyn.yiju.bean.HouseInfo;
 import cn.yyn.yiju.pojo.HouseView;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +19,8 @@ public interface HouseDao {
     List<HouseView> findAllHouseByType(@Param("houseType") Integer houseType);
 
     HouseView findHouseById(@Param("houseId") Integer houseId);
+
+    void saveHouse(House house);
+
+    void saveHouseInfo(HouseInfo houseInfo);
 }

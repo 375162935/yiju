@@ -1,5 +1,7 @@
 package cn.yyn.yiju.service.impl;
 
+import cn.yyn.yiju.bean.House;
+import cn.yyn.yiju.bean.HouseInfo;
 import cn.yyn.yiju.dao.HouseDao;
 import cn.yyn.yiju.pojo.HouseView;
 import cn.yyn.yiju.service.HouseService;
@@ -20,21 +22,35 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<HouseView> findFourHouse(Integer houseType) {
-        List<HouseView> list=houseDao.findFourHouse(houseType);
-        for (HouseView houseView:list){
-            System.out.println(houseView);
+        try {
+            List<HouseView> list = houseDao.findFourHouse(houseType);
+            for (HouseView houseView : list) {
+                System.out.println(houseView);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return this.houseDao.findFourHouse(houseType);
     }
 
     @Override
     public List<HouseView> findAllHouseByType(Integer page, Integer houseType) {
-        PageHelper.startPage(page,5);
+        PageHelper.startPage(page, 5);
         return this.houseDao.findAllHouseByType(houseType);
     }
 
     @Override
     public HouseView findHouseById(Integer houseId) {
         return this.houseDao.findHouseById(houseId);
+    }
+
+    @Override
+    public void saveHouse(House house) {
+        this.houseDao.saveHouse(house);
+    }
+
+    @Override
+    public void saveHouseInfo(HouseInfo houseInfo) {
+        this.houseDao.saveHouseInfo(houseInfo);
     }
 }

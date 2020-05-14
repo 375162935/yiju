@@ -13,7 +13,7 @@
 <body>
 
 <!--头部最上方的框-->
-<jsp:include page="${pageContext.request.contextPath}/pages/basehead.jsp"></jsp:include>
+<jsp:include page="/pages/basehead.jsp"></jsp:include>
 <!--头部最上方的框-->
 
 <!--Logo栏和手机号栏-->
@@ -40,10 +40,10 @@
 <div class="list-nav">
     <div class="width1190">
         <ul class="nav">
-            <li><a href="index.jsp">首页</a></li>
-            <li><a href="#">新房</a></li>
-            <li><a href="#">二手房</a></li>
-            <li><a href="#">租房</a></li>
+            <li><a href="${pageContext.request.contextPath}/index.jsp">首页</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=0">新房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=1">二手房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=2">租房</a></li>
             <li class="zhiding"><a href="#">指定购房</a></li>
             <li><a href="${pageContext.request.contextPath}/pages/housePost1.jsp">发布房源</a></li>
             <li><a href="#">公告中心</a></li>
@@ -67,7 +67,7 @@
         <div class="register-box">
             <div class="wrap">
                 <div class="register-box-con2">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="${pageContext.request.contextPath}/house/toHousePost.do" method="post" enctype="multipart/form-data">
                         <!--房源标题-->
                         <div class="register-box-con2-box clearfix mar-bottom20">
                             <label class="register-box-con2-box-left"><em class="bitian">* </em>房源标题</label>
@@ -96,7 +96,7 @@
                                        placeholder="请输入期望售价" id="reg_info_address"/>
                                 <!--                        	<label class="err err-top40" id="reg_info_address_text">公司所在地址，不超过40个字</label>-->
                                 <div id="parent">
-                                    <select name="price_unit">
+                                    <select name="priceUnit">
                                         <option>元/套</option>
                                         <option>元/月</option>
                                         <option>元/年</option>

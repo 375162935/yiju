@@ -24,7 +24,8 @@
         <table align="center" width="100%">
             <tr>
                 <td>
-                    <h1 class="logo"><a href="../index.jsp"><img src="../images/logo.png" width="163" height="59" /></a></h1>
+                    <h1 class="logo"><a href="../index.jsp"><img src="../images/logo.png" width="163" height="59"/></a>
+                    </h1>
                 </td>
                 <td align="center">
                     <div class="phones"><strong>000-00000000</strong></div>
@@ -41,10 +42,10 @@
 <div class="list-nav">
     <div class="width1190">
         <ul class="nav">
-            <li><a href="index.jsp">首页</a></li>
-            <li><a href="#">新房</a></li>
-            <li><a href="#">二手房</a></li>
-            <li><a href="#">租房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do">首页</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=0">新房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=1">二手房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=2">租房</a></li>
             <li class="zhiding"><a href="#">指定购房</a></li>
             <li><a href="${pageContext.request.contextPath}/pages/housePost1.jsp">发布房源</a></li>
             <li><a href="#">公告中心</a></li>
@@ -192,5 +193,80 @@
 <jsp:include page="../pages/basefoot.jsp"></jsp:include>
 </body>
 
+<script>
+    $(function () {
+        $("#next_submit").on("click", function () {
+
+
+            var houseNature = $("input[name=houseNature]").val();
+            var houseModel = $("input[name=houseModel]").val();
+            var houseYear = $("input[name=houseYear]").val();
+            var houseValid = $("input[name=houseValid]").val();
+            var houseLayout = $("input[name=houseLayout]").val();
+            var houseArea = $("input[name=houseArea]").val();
+            var houseTurn = $("input[name=houseTurn]").val();
+            var houseFloor = $("input[name=houseFloor]").val();
+            var floorAll = $("input[name=floorAll]").val();
+            var houseDecorate = $("input[name=houseDecorate]").val();
+            var houseLift;
+            if ($("input[name=houseDecorate]").val() == "是") {
+                houseLift = 1;
+            } else {
+                houseLift = 0;
+            }
+            if (houseNature == "") {
+                alert("请输入房源性质！")
+            }
+            if (houseModel == "") {
+                alert("请输入房源类型！")
+            }
+            if (houseYear == "") {
+                alert("请输入房源建造年！")
+            }
+            if (houseValid == "") {
+                alert("请输入房源期限！")
+            }
+            if (houseLayout == "") {
+                alert("请输入房源户型！")
+            }
+            if (houseArea == "") {
+                alert("请输入房源面积！")
+            }
+            if (houseTurn == "") {
+                alert("请输入房源朝向！")
+            }
+            if (houseFloor == "") {
+                alert("请输入房源楼层！")
+            }
+            if (floorAll == "") {
+                alert("请输入总楼层！")
+            }
+            if (houseDecorate == "") {
+                alert("请输入装修类型！")
+            }
+            $.ajax({
+                url: "${pageContext.request.contextPath}/house/saveHouseInfo.do",
+                type: "post",
+                dataType: "json",
+                data: {
+                    houseNature: houseNature,
+                    houseModel: houseModel,
+                    houseYear: houseYear,
+                    houseValid: houseValid,
+                    houseLayout: houseLayout,
+                    houseArea: houseArea,
+                    houseTurn: houseTurn,
+                    houseFloor: houseFloor,
+                    floorAll: floorAll,
+                    houseDecorate: houseDecorate,
+                    houseLift: houseLift
+                },
+                success: function (data) {
+                    window.location.href = "${pageContext.request.contextPath}/pages/housePost3.jsp"
+                }
+            })
+        })
+    })
+</script>
 
 </html>

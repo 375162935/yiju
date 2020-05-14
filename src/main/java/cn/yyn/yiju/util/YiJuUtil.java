@@ -7,6 +7,9 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @Author Administrator
@@ -19,10 +22,17 @@ public class YiJuUtil {
         String local = "";
         File file = new File(local);
         String upload = "999.jpg";
-        upload(file,upload);
+//        upload(file, upload);
 
     }
-    public static void upload(File file,String upload){
+
+    public static String getPirName() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String priName = sdf.format(new Date()) + UUID.randomUUID().toString();
+        return priName;
+    }
+
+    public static void upload(byte[] file, String upload) {
         //准备数据建立连接七牛云
         //密匙
         final String AK = "18oFNtGFNjmHdgBinnprbFto-ay4qe7lCUgh6-gv";
@@ -39,6 +49,7 @@ public class YiJuUtil {
         UploadManager uploadManager = new UploadManager(cfg);
         try {
             uploadManager.put(file, upload, token);
+            System.out.println("上传成功");
         } catch (QiniuException e) {
             e.printStackTrace();
         }

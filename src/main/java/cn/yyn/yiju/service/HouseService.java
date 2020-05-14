@@ -1,5 +1,7 @@
 package cn.yyn.yiju.service;
 
+import cn.yyn.yiju.bean.House;
+import cn.yyn.yiju.bean.HouseInfo;
 import cn.yyn.yiju.pojo.HouseView;
 
 import java.util.List;
@@ -18,4 +20,8 @@ public interface HouseService {
     List<HouseView> findAllHouseByType(Integer page,Integer houseType);
 
     HouseView findHouseById(Integer houseId);
+
+    void saveHouse(House house);
+
+    void saveHouseInfo(HouseInfo houseInfo);
 }
