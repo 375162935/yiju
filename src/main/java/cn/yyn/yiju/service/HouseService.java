@@ -2,6 +2,7 @@ package cn.yyn.yiju.service;
 
 import cn.yyn.yiju.bean.House;
 import cn.yyn.yiju.bean.HouseInfo;
+import cn.yyn.yiju.bean.HouseInter;
 import cn.yyn.yiju.pojo.HouseView;
 
 import java.util.List;
@@ -24,4 +25,6 @@ public interface HouseService {
     void saveHouse(House house);
 
     void saveHouseInfo(HouseInfo houseInfo);
+
+    void saveHousePost3(HouseInter houseInter);
 }

@@ -40,10 +40,10 @@
 <div class="list-nav">
     <div class="width1190">
         <ul class="nav">
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do">首页</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=0">新房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=1">二手房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=2">租房</a></li>
+            <li><a href="index.jsp">首页</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/searchHouseViewByType.do?houseType=0&currentPage=1">新房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/searchHouseViewByType.do?houseType=1&currentPage=1">二手房</a></li>
+            <li><a href="${pageContext.request.contextPath}/house/searchHouseViewByType.do?houseType=2&currentPage=1">租房</a></li>
             <li class="zhiding"><a href="#">指定购房</a></li>
             <li><a href="${pageContext.request.contextPath}/pages/housePost1.jsp">发布房源</a></li>
             <li><a href="#">公告中心</a></li>
@@ -170,5 +170,140 @@
 <jsp:include page="../pages/basefoot.jsp"></jsp:include>
 
 </body>
+<script>
+    var bed =0;
+    var washing=0;
+    var air=0;
+    var balcony=0;
+    var ice=0;
+    var toilet=0;
+    var kitchen=0;
+    var tv=0;
+    var heater=0;
+    var wardrode=0;
+    var heating=0;
+    var internet=0;
+    var sofa=0;
+    function bedClick(){
+        if (bed ==0){
+            bed =1;
+        }else{
+            bed=0;
+        }
+    }
+    function washingClick(){
+        if (washing ==0){
+            washing =1;
+        }else{
+            washing=0;
+        }
+    }function airClick(){
+        if (air ==0){
+            air =1;
+        }else{
+            air=0;
+        }
+    }
+    function balconyClick(){
+        if (balcony ==0){
+            balcony =1;
+        }else{
+            balcony=0;
+        }
+    }
+    function iceClick(){
+        if (ice ==0){
+            ice =1;
+        }else{
+            ice=0;
+        }
+    }
+    function toiletClick(){
+        if (toilet ==0){
+            toilet =1;
+        }else{
+            toilet=0;
+        }
+    }
+    function kitchenClick(){
+        if (kitchen ==0){
+            kitchen =1;
+        }else{
+            kitchen=0;
+        }
+    }
+    function tvClick(){
+        if (tv ==0){
+            tv =1;
+        }else{
+            tv=0;
+        }
+    }
+    function heaterClick(){
+        if (heater ==0){
+            heater =1;
+        }else{
+            heater=0;
+        }
+    }
+    function wardrodeClick(){
+        if (wardrode ==0){
+            wardrode =1;
+        }else{
+            wardrode=0;
+        }
+    }
+    function heatingClick(){
+        if (heating ==0){
+            heating =1;
+        }else{
+            heating=0;
+        }
+    }
+    function internetClick(){
+        if (internet ==0){
+            internet =1;
+        }else{
+            internet=0;
+        }
+    }
+    function sofaClick(){
+        if (sofa ==0){
+            sofa =1;
+        }else{
+            sofa=0;
+        }
+    }
+
+
+    $(function () {
+        $("#next_submit").on("click",function () {
+            $.ajax({
+                url:"${pageContext.request.contextPath}/house/saveHousePost3.do",
+                type:"post",
+                dataType:"json",
+                data:{bed:bed,
+                    washing:washing,
+                    air:air,
+                    balcony:balcony,
+                    ice:ice,
+                    toilet:toilet,
+                    kitchen:kitchen,
+                    tv:tv,
+                    heater:heater,
+                    wardrode:wardrode,
+                    heating:heating,
+                    internet:internet,
+                    sofa:sofa
+                },
+                success:function (data) {
+                    window.location.href="${pageContext.request.contextPath}/house/findHouseById.do"
+                }
+
+            })
+
+        })
+    })
+</script>
 
 </html>

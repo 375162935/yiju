@@ -2,6 +2,7 @@ package cn.yyn.yiju.controller;
 
 import cn.yyn.yiju.bean.House;
 import cn.yyn.yiju.bean.HouseInfo;
+import cn.yyn.yiju.bean.HouseInter;
 import cn.yyn.yiju.bean.UserInfo;
 import cn.yyn.yiju.pojo.HouseView;
 import cn.yyn.yiju.service.HouseService;
@@ -20,8 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author 杨以诺
@@ -108,56 +108,59 @@ public class HouseController {
         house.setHousePrice(housePrice);
         house.setPriceUnit(priceUnit);
 
+        Map<String,byte[]> images=new HashMap<>();
         if (houseHeadimg.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,houseHeadimg.getBytes());
             house.setHouseHeadimg(pirName);
-            YiJuUtil.upload(houseHeadimg.getBytes(), pirName);
+//            YiJuUtil.upload(houseHeadimg.getBytes(), pirName);
         }
         if (housePlanimg1.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,housePlanimg1.getBytes());
             house.setHousePlanimg1(pirName);
-            YiJuUtil.upload(housePlanimg1.getBytes(), pirName);
         }
         if (housePlanimg2.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,housePlanimg2.getBytes());
             house.setHousePlanimg2(pirName);
-            YiJuUtil.upload(housePlanimg2.getBytes(), pirName);
         }
         if (houseImg1.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,housePlanimg1.getBytes());
             house.setHouseImg1(pirName);
-            YiJuUtil.upload(houseImg1.getBytes(), pirName);
         }
         if (houseImg2.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,houseImg2.getBytes());
             house.setHouseImg2(pirName);
-            YiJuUtil.upload(houseImg2.getBytes(), pirName);
         }
         if (houseImg3.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,houseImg3.getBytes());
             house.setHouseImg3(pirName);
-            YiJuUtil.upload(houseImg3.getBytes(), pirName);
         }
         if (houseImg4.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,houseImg4.getBytes());
             house.setHouseImg4(pirName);
-            YiJuUtil.upload(houseImg4.getBytes(), pirName);
         }
         if (houseImg5.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,houseImg5.getBytes());
             house.setHouseImg5(pirName);
-            YiJuUtil.upload(houseImg5.getBytes(), pirName);
         }
         if (houseImg6.getSize() != 0) {
             String pirName = YiJuUtil.getPirName();
+            images.put(pirName,houseImg6.getBytes());
             house.setHouseImg6(pirName);
-            YiJuUtil.upload(houseImg6.getBytes(), pirName);
         }
         UserInfo userInfo= (UserInfo) session.getAttribute("user");
         house.setUserId(userInfo.getUserId());
         house.setCreateTime(new Date().getTime());
         house.setUpdateTime(new Date().getTime());
-//        this.houseService.saveHouse(house);
+        this.houseService.saveHouse(house);
+        session.setAttribute("house",house);
         System.out.println(house);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("housePost2");
@@ -166,11 +169,44 @@ public class HouseController {
 
     @ResponseBody
     @RequestMapping("/saveHouseInfo.do")
-    public String saveHouseInfo(HouseInfo houseInfo) {
-        houseInfo.setHouseId(10045);
+    public String saveHouseInfo(HouseInfo houseInfo,HttpSession session) {
+        session.setAttribute("houseInfo",houseInfo);
+        return new JSONObject().toString();
+    }
+
+    //增加房源第三页
+    //saveHousePost3
+    @ResponseBody
+    @RequestMapping("/saveHousePost3.do")
+    public String saveHousePost3(HouseInter houseInter,HttpSession session){
+        session.setAttribute("houseInter",houseInter);
+        return new JSONObject().toString();
+    }
+    //doHousePost
+    @RequestMapping("/doHousePost.do")
+    public String doHousePost(HttpSession session){
+        //1.处理图片上传
+        Map<String,byte[]> images = (Map<String, byte[]>) session.getAttribute("images");
+        Set<String> keys = images.keySet();
+        for(String key:keys){
+            byte[] bytes=images.get(key);
+            YiJuUtil.upload(bytes,key);
+        }
+        //2.处理house
+        House house= (House) session.getAttribute("house");
+        house.setCreateTime(new Date().getTime());
+        house.setUpdateTime(new Date().getTime());
+        this.houseService.saveHouse(house);
+        //3.处理houseInfo
+        HouseInfo houseInfo= (HouseInfo) session.getAttribute("houseInfo");
+        houseInfo.setHouseId(house.getHouseId());
         houseInfo.setCreateTime(new Date().getTime());
         houseInfo.setUpdateTime(new Date().getTime());
-        this.houseService.saveHouseInfo(houseInfo);
-        return new JSONObject().toString();
+        //4.处理houseInter
+        HouseInter houseInter= (HouseInter) session.getAttribute("houseInter");
+        houseInter.setHouseId(house.getHouseId());
+        houseInter.setCreateTime(new Date().getTime());
+        houseInter.setUpdateTime(new Date().getTime());
+        return "redirect:findHouseById.do?houseId="+house.getHouseId();
     }
 }

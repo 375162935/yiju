@@ -14,7 +14,7 @@
 <body>
 
 <!--头部最上方的框-->
-<jsp:include page="${pageContext.request.contextPath}/pages/basehead.jsp"></jsp:include>
+<jsp:include page="/pages/basehead.jsp"></jsp:include>
 <!--头部最上方的框-->
 
 <!--Logo栏和手机号栏-->

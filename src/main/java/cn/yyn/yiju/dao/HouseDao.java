@@ -2,6 +2,7 @@ package cn.yyn.yiju.dao;
 
 import cn.yyn.yiju.bean.House;
 import cn.yyn.yiju.bean.HouseInfo;
+import cn.yyn.yiju.bean.HouseInter;
 import cn.yyn.yiju.pojo.HouseView;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,4 +24,6 @@ public interface HouseDao {
     void saveHouse(House house);
 
     void saveHouseInfo(HouseInfo houseInfo);
+
+    void saveHousePost3(HouseInter houseInter);
 }
