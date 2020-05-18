@@ -22,9 +22,9 @@ public interface HouseService {
 
     HouseView findHouseById(Integer houseId);
 
-    void saveHouse(House house);
+    void saveHousePost1(House house);
 
-    void saveHouseInfo(HouseInfo houseInfo);
+    void saveHousePost2(HouseInfo houseInfo);
 
     void saveHousePost3(HouseInter houseInter);
 }

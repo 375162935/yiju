@@ -108,70 +108,17 @@
  --%>
 </head>
 <body>
-    <jsp:include page="/pages/basehead.jsp"></jsp:include>
+    <jsp:include page="/pages/basehead.jsp">
+        <jsp:param name="jspType" value="main"/>
+    </jsp:include>
 <%--<!--头部最上方的框-->--%>
-
-<!--Logo栏和手机号栏-->
-<div class="logo-phone">
-    <div class="width1190">
-        <table align="center" width="100%">
-            <tr>
-                <td>
-                    <h1 class="logo"><a href="${pageContext.request.contextPath}/house/findFourHouse.do"><img
-                            src="${pageContext.request.contextPath}/images/logo.png" width="163" height="59"/></a></h1>
-                </td>
-                <td>
-                    <div class="searchbox">
-                        <div class="mod_select">
-                            <div class="select_box">
-                                <span class="select_txt">房屋</span>
-                            </div>
-                        </div>
-                        <%--FIXME 这里是搜索栏，需要实现相应的模糊搜索功能 --%>
-                        <form action="#">
-                            <input type="text" name="house_title" id="searchPlaceholder" class="import"
-                                   placeholder="请输入搜索信息">
-                            <input type="submit" value="搜   索" class="btn-search">
-                        </form>
-                    </div>
-                </td>
-                <td align="center">
-                    <div class="phones"><strong>000-00000000</strong></div>
-                    <div class="clears"></div>
-                </td>
-
-            </tr>
-        </table>
-    </div><!--width1190/-->
-</div><!--logo-phone/-->
-<!--Logo栏和手机号栏-->
-
-<!--导航栏-->
-<div class="list-nav">
-    <div class="width1190">
-        <ul class="nav">
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do">首页</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=0">新房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=1">二手房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=2">租房</a></li>
-            <li class="zhiding"><a href="#">指定购房</a></li>
-            <li><a href="${pageContext.request.contextPath}/pages/housePost1.jsp">发布房源</a></li>
-            <li><a href="#">公告中心</a></li>
-            <li><a href="#">关于我们</a></li>
-            <div class="clears"></div>
-        </ul><!--nav-->
-        <div class="clears"></div>
-    </div><!--width1190-->
-</div><!--list-nav-->
-<!--导航栏End-->
 
 <br>
 
 <!--广告轮播栏-->
 <div class="width1190">
     <ul id="adv">
-        <li style="display: block;"><img src="${pageContext.request.contextPath}/images/lunbotu/fang1.jpg" alt=""
-                                         id="pic"></li>
+        <li style="display: block;"><img src="${pageContext.request.contextPath}/images/lunbotu/fang1.jpg" alt="" id="pic"></li>
         <img src="${pageContext.request.contextPath}/images/lunbotu/l.png" id="prev" alt="" onclick="showPre()">
         <img src="${pageContext.request.contextPath}/images/lunbotu/r.png" id="next" alt="" onclick="showNext()">
     </ul>

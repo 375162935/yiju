@@ -22,46 +22,6 @@
 <jsp:include page="../pages/basehead.jsp"></jsp:include>
 <!--头部最上方的框-->
 
-<!--Logo栏和手机号栏-->
-<div class="logo-phone">
-    <div class="width1190">
-
-        <table align="center" width="100%">
-            <tr>
-                <td>
-                    <h1 class="logo"><a href="${pageContext.request.contextPath}/house/findFourHouse.do">
-                        <img src="${pageContext.request.contextPath}/images/logo.png" width="163" height="59" /></a></h1>
-                </td>
-                <td align="center">
-                    <div class="phones"><strong>000-00000000</strong></div>
-                    <div class="clears"></div>
-                </td>
-
-            </tr>
-        </table>
-    </div><!--width1190/-->
-</div><!--logo-phone/-->
-<!--Logo栏和手机号栏 END-->
-
-<!--导航栏-->
-<div class="list-nav">
-    <div class="width1190">
-        <ul class="nav">
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do">首页</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=0">新房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=1">二手房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/findFourHouse.do?houseType=2">租房</a></li>
-            <li class="zhiding"><a href="#">指定购房</a></li>
-            <li><a href="${pageContext.request.contextPath}/pages/housePost1.jsp">发布房源</a></li>
-            <li><a href="#">公告中心</a></li>
-            <li><a href="#">关于我们</a></li>
-            <div class="clears"></div>
-        </ul><!--nav-->
-        <div class="clears"></div>
-    </div><!--width1190-->
-</div><!--list-nav-->
-<!--导航栏End-->
-
 <div class="content">
     <div class="width1190">
         <p style="font-size: 16px">当前位置：<a href="${pageContext.request.contextPath}/house/findFourHouse.do">首页</a> ＞＞ <a href="#">房源详情</a></p>
@@ -72,7 +32,7 @@
 <div class="content">
     <div class="width1190" style="width:1000px;">
         <div class="proImg fl">
-            <img src="http://image.cxhit.com/${houseInfo.houseHeadimg}" />
+            <img src="http://qa5rn87aj.bkt.clouddn.com//${houseInfo.houseHeadimg}" />
         </div><!--proImg/-->
         <div style="width:535px;margin:30px 0;float: right;">
             <h3 class="proTitle">${houseInfo.houseTitle} </h3>

@@ -34,12 +34,12 @@
 
 <!--  <filter>-->
 <!--    <filter-name>loginFilter</filter-name>-->
-<!--    <filter-class>com.yiju.filter.LoginFilter</filter-class>-->
+<!--    <filter-class>cn.yyn.yiju.filter.LoginFilter</filter-class>-->
 <!--  </filter>-->
 <!--  <filter-mapping>-->
 <!--    <filter-name>loginFilter</filter-name>-->
 <!--    <url-pattern>*.do</url-pattern>-->
-<!--    <url-pattern>*.jsp</url-pattern>-->
+<!--    <url-pattern>/pages/*.jsp</url-pattern>-->
 <!--  </filter-mapping>-->
 
   <!-- 前端控制器（加载classpath:spring-mvc.xml 服务器启动创建servlet） -->

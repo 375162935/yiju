@@ -23,13 +23,9 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<HouseView> findFourHouse(Integer houseType) {
-        try {
-            List<HouseView> list = houseDao.findFourHouse(houseType);
-            for (HouseView houseView : list) {
-                System.out.println(houseView);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        List<HouseView> list = houseDao.findFourHouse(houseType);
+        for (HouseView houseView : list) {
+            System.out.println(houseView);
         }
         return this.houseDao.findFourHouse(houseType);
     }
@@ -46,13 +42,13 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void saveHouse(House house) {
-        this.houseDao.saveHouse(house);
+    public void saveHousePost1(House house) {
+        this.houseDao.saveHousePost1(house);
     }
 
     @Override
-    public void saveHouseInfo(HouseInfo houseInfo) {
-        this.houseDao.saveHouseInfo(houseInfo);
+    public void saveHousePost2(HouseInfo houseInfo) {
+        this.houseDao.saveHousePost2(houseInfo);
     }
 
     @Override

@@ -80,15 +80,17 @@ public class HouseController {
 
     @RequestMapping("/findHouseById.do")
     public ModelAndView findHouseById(Integer houseId) {
+        System.out.println("houseId:"+houseId);
         HouseView hv = this.houseService.findHouseById(houseId);
+        System.out.println(hv);
         ModelAndView mv = new ModelAndView();
         mv.addObject("houseInfo", hv);
         mv.setViewName("details");
         return mv;
     }
 
-    @RequestMapping("/toHousePost.do")
-    public ModelAndView toHousePost(@RequestParam("houseTitle") String houseTitle,
+    @RequestMapping("/saveHousePost1.do")
+    public ModelAndView saveHousePost1(@RequestParam("houseTitle") String houseTitle,
                                     @RequestParam("houseAddress") String houseAddress,
                                     @RequestParam("housePrice") BigDecimal housePrice,
                                     @RequestParam("priceUnit") String priceUnit,
@@ -155,21 +157,16 @@ public class HouseController {
             images.put(pirName,houseImg6.getBytes());
             house.setHouseImg6(pirName);
         }
-        UserInfo userInfo= (UserInfo) session.getAttribute("user");
-        house.setUserId(userInfo.getUserId());
-        house.setCreateTime(new Date().getTime());
-        house.setUpdateTime(new Date().getTime());
-        this.houseService.saveHouse(house);
+        session.setAttribute("images",images);
         session.setAttribute("house",house);
-        System.out.println(house);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("housePost2");
         return mv;
     }
 
     @ResponseBody
-    @RequestMapping("/saveHouseInfo.do")
-    public String saveHouseInfo(HouseInfo houseInfo,HttpSession session) {
+    @RequestMapping("/saveHousePost2.do")
+    public String saveHousePost2(HouseInfo houseInfo,HttpSession session) {
         session.setAttribute("houseInfo",houseInfo);
         return new JSONObject().toString();
     }
@@ -183,8 +180,8 @@ public class HouseController {
         return new JSONObject().toString();
     }
     //doHousePost
-    @RequestMapping("/doHousePost.do")
-    public String doHousePost(HttpSession session){
+    @RequestMapping("/doHousePostAll.do")
+    public String doHousePostAll(HttpSession session){
         //1.处理图片上传
         Map<String,byte[]> images = (Map<String, byte[]>) session.getAttribute("images");
         Set<String> keys = images.keySet();
@@ -193,20 +190,25 @@ public class HouseController {
             YiJuUtil.upload(bytes,key);
         }
         //2.处理house
+        UserInfo userInfo= (UserInfo) session.getAttribute("user");
         House house= (House) session.getAttribute("house");
+        house.setUserId(userInfo.getUserId());
         house.setCreateTime(new Date().getTime());
         house.setUpdateTime(new Date().getTime());
-        this.houseService.saveHouse(house);
+        this.houseService.saveHousePost1(house);
         //3.处理houseInfo
         HouseInfo houseInfo= (HouseInfo) session.getAttribute("houseInfo");
         houseInfo.setHouseId(house.getHouseId());
         houseInfo.setCreateTime(new Date().getTime());
         houseInfo.setUpdateTime(new Date().getTime());
+        this.houseService.saveHousePost2(houseInfo);
         //4.处理houseInter
         HouseInter houseInter= (HouseInter) session.getAttribute("houseInter");
         houseInter.setHouseId(house.getHouseId());
         houseInter.setCreateTime(new Date().getTime());
         houseInter.setUpdateTime(new Date().getTime());
+        this.houseService.saveHousePost3(houseInter);
+        System.out.println("post:"+house.getHouseId());
         return "redirect:findHouseById.do?houseId="+house.getHouseId();
     }
 }

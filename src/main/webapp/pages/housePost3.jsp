@@ -13,47 +13,8 @@
 </head>
 <body>
 <!--头部最上方的框-->
-<jsp:include page="${pageContext.request.contextPath}/pages/basehead.jsp"></jsp:include>
+<jsp:include page="/pages/basehead.jsp"></jsp:include>
 <!--头部最上方的框-->
-
-<!--Logo栏和手机号栏-->
-<div class="logo-phone">
-    <div class="width1190">
-
-        <table align="center" width="100%">
-            <tr>
-                <td>
-                    <h1 class="logo"><a href="../index.jsp"><img src="../images/logo.png" width="163" height="59" /></a></h1>
-                </td>
-                <td align="center">
-                    <div class="phones"><strong>000-00000000</strong></div>
-                    <div class="clears"></div>
-                </td>
-
-            </tr>
-        </table>
-    </div><!--width1190/-->
-</div><!--logo-phone/-->
-<!--Logo栏和手机号栏 END-->
-
-<!--导航栏-->
-<div class="list-nav">
-    <div class="width1190">
-        <ul class="nav">
-            <li><a href="index.jsp">首页</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/searchHouseViewByType.do?houseType=0&currentPage=1">新房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/searchHouseViewByType.do?houseType=1&currentPage=1">二手房</a></li>
-            <li><a href="${pageContext.request.contextPath}/house/searchHouseViewByType.do?houseType=2&currentPage=1">租房</a></li>
-            <li class="zhiding"><a href="#">指定购房</a></li>
-            <li><a href="${pageContext.request.contextPath}/pages/housePost1.jsp">发布房源</a></li>
-            <li><a href="#">公告中心</a></li>
-            <li><a href="#">关于我们</a></li>
-            <div class="clears"></div>
-        </ul><!--nav-->
-        <div class="clears"></div>
-    </div><!--width1190-->
-</div><!--list-nav-->
-<!--导航栏End-->
 
 <%--信息填写栏--%>
 <div class="width1190" align="center">
@@ -197,7 +158,8 @@
         }else{
             washing=0;
         }
-    }function airClick(){
+    }
+    function airClick(){
         if (air ==0){
             air =1;
         }else{
@@ -275,7 +237,6 @@
         }
     }
 
-
     $(function () {
         $("#next_submit").on("click",function () {
             $.ajax({
@@ -297,7 +258,7 @@
                     sofa:sofa
                 },
                 success:function (data) {
-                    window.location.href="${pageContext.request.contextPath}/house/findHouseById.do"
+                    window.location.href="${pageContext.request.contextPath}/house/doHousePostAll.do"
                 }
 
             })
