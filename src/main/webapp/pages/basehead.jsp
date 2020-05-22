@@ -15,24 +15,16 @@
         <div class="fl" style="font-size: 14px">您好，欢迎来到<a
                 href="${pageContext.request.contextPath}/index.jsp">易居住房信息平台！</a></div>
         <div class="fr">
-            <c:if test="${user==null}" var="loginType">
-                <a href="${pageContext.request.contextPath}/pages/login.jsp" style="font-size: 14px">
-                    <strong>登录</strong></a> |
-                <a href="${pageContext.request.contextPath}/pages/signup.jsp" style="font-size: 14px">
-                    <strong>注册</strong></a>
-                <a href="${pageContext.request.contextPath}/pages/login.jsp"
-                   style="font-size: 14px"><strong>个人中心</strong></a> |
-                <a href="${pageContext.request.contextPath}/pages/login.jsp"
-                   style="font-size: 14px"><strong>退出</strong></a> |
-            </c:if>
-            <c:if test="${!loginType}">
-                <a href="#" style="font-size: 14px" target="_blank"><strong>你好 ！${user.truename}</strong></a>
-                <a style="font-size: 14px">欢迎使用</a>　|
-                <a href="${pageContext.request.contextPath}/pages/personal.jsp"
-                   style="font-size: 14px"><strong>个人中心</strong></a> |
-                <a href="${pageContext.request.contextPath}/user/edit.do"
-                   style="font-size: 14px"><strong>退出</strong></a> |
-            </c:if>
+            <a href="${pageContext.request.contextPath}/pages/login.jsp" style="font-size: 14px">
+                <strong>登录</strong></a> |
+            <a href="${pageContext.request.contextPath}/pages/signup.jsp" style="font-size: 14px">
+                <strong>注册</strong></a>
+            <a href="#" style="font-size: 14px" target="_blank"><strong>你好 ！${user.truename}</strong></a>
+            <a style="font-size: 14px">欢迎使用</a>　|
+            <a href="${pageContext.request.contextPath}/user/geren.do"
+               style="font-size: 14px"><strong>个人中心</strong></a> |
+            <a href="${pageContext.request.contextPath}/user/edit.do"
+               style="font-size: 14px"><strong>退出</strong></a> |
             <a href="javascript:;" onclick="" style="font-size: 14px">加入收藏</a> |
             <a href="javascript:;" onclick="" style="font-size: 14px">设为首页</a>
         </div>
@@ -49,7 +41,7 @@
                     <h1 class="logo"><a href="${pageContext.request.contextPath}/house/findFourHouse.do"><img
                             src="${pageContext.request.contextPath}/images/logo.png" width="163" height="59"/></a></h1>
                 </td>
-                <%if (request.getParameter("jspType")!=null) {%>
+                <%if (request.getParameter("jspType") != null) {%>
                 <td>
                     <div class="searchbox">
                         <div class="mod_select">
@@ -64,7 +56,8 @@
                             <input type="submit" value="搜   索" class="btn-search">
                         </form>
                     </div>
-                </td><%}%>
+                </td>
+                <%}%>
                 <td align="center">
                     <div class="phones"><strong>000-00000000</strong></div>
                     <div class="clears"></div>
@@ -76,6 +69,10 @@
 </div><!--logo-phone/-->
 <!--Logo栏和手机号栏-->
 
+<%
+    String url = request.getRequestURI();
+    if (!"/yiju_war_exploded/pages/login.jsp".equals(url)) {
+%>
 <!--导航栏-->
 <div class="list-nav">
     <div class="width1190">
@@ -94,6 +91,6 @@
     </div><!--width1190-->
 </div><!--list-nav-->
 <!--导航栏End-->
-
+<%}%>
 </body>
 </html>

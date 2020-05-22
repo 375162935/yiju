@@ -43,8 +43,8 @@ public class UserController {
             jsonObject.put("result", "1");
         } else {
             System.out.println("登陆成功");
-            session.setAttribute("user", user);
             jsonObject.put("result", phone);
+            session.setAttribute("user", user);
         }
         System.out.println(jsonObject.toString());
         return jsonObject.toString();
@@ -109,8 +109,8 @@ public class UserController {
     }
 
     @RequestMapping("/deleteAuthById.do")
-    public String deleteAuthById(HttpSession session){
-        UserInfo userInfo= (UserInfo) session.getAttribute("user");
+    public String deleteAuthById(HttpSession session) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
         this.userService.deleteAuthById(userInfo.getUserId());
         return "personal";
     }
@@ -119,18 +119,23 @@ public class UserController {
     @RequestMapping("/updPasswordById.do")
     public String updPasswordById(@RequestParam("oldpassword") String oldpassword,
                                   @RequestParam("password") String password,
-                                  HttpSession session){
-        UserInfo userInfo= (UserInfo) session.getAttribute("user");
+                                  HttpSession session) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("user");
         JSONObject jsonObject = new JSONObject();
-        if (!userInfo.getPassword().equals(oldpassword)){
-            jsonObject.put("result","0");
-        }else {
+        if (!userInfo.getPassword().equals(oldpassword)) {
+            jsonObject.put("result", "0");
+        } else {
             userInfo.setPassword(password);
             this.userService.updPassword(userInfo);
-            jsonObject.put("result","1");
+            jsonObject.put("result", "1");
         }
 
         return jsonObject.toString();
+    }
+
+    @RequestMapping("geren.do")
+    public String geren(){
+        return "personal";
     }
 
     @RequestMapping("/edit.do")

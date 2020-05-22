@@ -41,15 +41,16 @@
     </bean>
 
     <!-- 5.配置拦截器 -->
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            &lt;!&ndash; 拦截所有的MVC控制器 &ndash;&gt;-->
-<!--            <mvc:mapping path="/**"/>-->
-<!--            &lt;!&ndash; 放行机制，可以测试/制定对某一个页面不进行拦截 &ndash;&gt;-->
-<!--            <mvc:exclude-mapping path="/house/findFourHouse.do"/>-->
-<!--            &lt;!&ndash; 指定使用那个拦截器 &ndash;&gt;-->
-<!--            <bean class="cn.yyn.yiju.interceptor.LoginInterceptor"></bean>-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有的MVC控制器 -->
+            <mvc:mapping path="/**"/>
+            <!-- 放行机制，可以测试/制定对某一个页面不进行拦截 -->
+            <mvc:exclude-mapping path="/house/findFourHouse.do"/>
+            <mvc:exclude-mapping path="/user/login.do"/>
+            <!-- 指定使用那个拦截器 -->
+            <bean class="cn.yyn.yiju.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

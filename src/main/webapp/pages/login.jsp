@@ -19,27 +19,6 @@
 <%--加入头部--%>
 <jsp:include page="basehead.jsp"></jsp:include>
 
-<!--Logo栏和手机号栏-->
-<div class="logo-phone">
-    <div class="width1190">
-
-        <table align="center" width="100%">
-            <tr>
-                <td>
-                    <h1 class="logo"><a href="../index.jsp"><img
-                            src="${pageContext.request.contextPath}/images/logo.png" width="163" height="59"/></a></h1>
-                </td>
-
-                <td align="center">
-                    <div class="phones"><strong>000-0000000</strong></div>
-                    <div class="clears"></div>
-                </td>
-            </tr>
-        </table>
-    </div><!--width1190/-->
-</div><!--logo-phone/-->
-<!--Logo栏和手机号栏-->
-
 <hr width="1280px">
 
 <!--注册-->
@@ -121,6 +100,7 @@
 <script type="text/javascript">
     $(function () {
         $(".submit").on("click", function () {
+            $.ajax()
             var phone = $("input[name=phone]").val();
             var password = $("input[name=password]").val();
             var code=$("input[name=verifyCode]").val();
